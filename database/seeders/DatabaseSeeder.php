@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         Post::factory(50)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            UserSeeder::class,
+        ]);
     }
 }
