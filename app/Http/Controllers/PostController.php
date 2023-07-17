@@ -16,7 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
+        $posts = Post::orderBy('updated_at', 'desc')
+            ->paginate(config('const.paginate'));
+
         foreach ($posts as $post) {
             $post->title = Str::limit($post->title, 40, '...');
             $post->content = Str::limit($post->content, 80, '...');
