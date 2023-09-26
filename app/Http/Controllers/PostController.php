@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -33,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post/create');
     }
 
     /**
@@ -44,7 +46,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $data = $request->all();
+            Post::create($data);
+            DB::commit();
+        } catch (\Throwable $th) {
+            Log::error($th);
+            DB::rollBack();
+        }
+        return redirect()
+        ->route('post.index')
+        ->with('message', '記事を投稿しました');
     }
 
     /**

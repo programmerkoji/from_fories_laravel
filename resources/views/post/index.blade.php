@@ -6,7 +6,7 @@
     <section class="text-gray-600 body-font overflow-hidden">
         <div class="container px-5 py-12 mx-auto">
             <div class="pb-8 w-full">
-                <button class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">新規投稿</button>
+                <a href="{{ route('post.create') }}" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">新規投稿</a>
             </div>
             <div class="-my-8 divide-y-2 divide-gray-100">
                 @foreach ($posts as $key => $post)
