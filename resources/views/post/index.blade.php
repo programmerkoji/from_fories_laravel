@@ -11,7 +11,7 @@
             <div class="-my-8 divide-y-2 divide-gray-100">
                 @foreach ($posts as $key => $post)
                     <div class="py-8 flex flex-wrap md:flex-nowrap">
-                        <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                        <div class="w-full md:w-40 md:mb-0 mb-3 flex-shrink-0 flex flex-col">
                             <span class="font-semibold title-font text-gray-700">CATEGORY</span>
                             <span class="mt-1 text-gray-500 text-sm">
                                 @if ($post->updated_at > $post->created_at)
@@ -21,16 +21,21 @@
                                 @endif
                             </span>
                         </div>
-                        <div class="md:flex-grow">
+                        <div class="w-full md:flex-1">
                             <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $post->title }}</h2>
                             <p class="leading-relaxed">{{ $post->content }}</p>
-                            <a href="{{ route('post.show', ['post' => $post->id]) }}" class="text-indigo-500 inline-flex items-center mt-4">Learn More
+                            <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="text-indigo-500 inline-flex items-center mt-4">Learn More
                             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5l7 7-7 7"></path>
                             </svg>
                             </a>
                         </div>
+                        <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post" class="w-full md:w-32 md:mb-0 flex items-center justify-end">
+                            @csrf
+                            @method('delete')
+                            <button class="px-6 py-2 bg-red-600 text-white rounded-md text-sm">削除</button>
+                        </form>
                     </div>
                 @endforeach
             </div>

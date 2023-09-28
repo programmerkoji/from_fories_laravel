@@ -79,7 +79,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -91,7 +92,20 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $data = $request->all();
+            Post::findOrFail($id)
+                ->fill($data)
+                ->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            Log::error($th);
+            DB::rollBack();
+        }
+        return redirect()
+        ->route('post.index')
+        ->with('message', '記事を編集しました');
     }
 
     /**
@@ -102,6 +116,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::findOrFail($id)->delete();
+        return redirect()
+        ->route('post.index')
+        ->with('message', '記事を削除しました');
     }
 }
