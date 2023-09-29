@@ -8,9 +8,16 @@
             @csrf
             @method('PUT')
             <div class="flex flex-col gap-4">
-                <div class="flex w-full items-center gap-2">
+                <div class="flex flex-col w-full gap-2">
                     <label for="title" class="whitespace-nowrap">タイトル</label>
                     <input type="text" name="title" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="title" value="{{ $post->title }}">
+                </div>
+
+                <div>
+                    <select name="is_publish" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="0" {{ $post->is_publish === 0 ? 'selected' : '' }}>非公開</option>
+                        <option value="1" {{ $post->is_publish === 1 ? 'selected' : '' }}>公開</option>
+                    </select>
                 </div>
 
                 <div class="flex gap-2 items-center">
@@ -32,7 +39,7 @@
             </div>
             <div class="flex gap-2 mt-6">
                 <button type="button" onclick="location.href='{{ route('post.index') }}'" class="flex text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
-                <button type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">投稿する</button>
+                <button type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">保存</button>
             </div>
         </form>
     </div>

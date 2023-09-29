@@ -18,6 +18,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => fake()->text(),
+            'is_publish' => fake()->boolean(),
             'content' => fake()->realText(),
         ];
     }
