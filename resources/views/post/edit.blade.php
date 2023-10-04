@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">編集</h2>
-    </x-slot>
 
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 bg-white mt-8">
         <form action="{{ route('post.update', ['post' => $post->id]) }}" method="post">
@@ -34,8 +31,9 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4 flex flex-col gap-2">
-                <textarea name="content" id="content" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-96 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $post->content }}</textarea>
+            <div class="bl_post_conts mt-4 flex flex-col md:flex-row">
+                <textarea  id="markdown-input" name="content" id="markdown_editor_textarea" class="w-full md:w-1/2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-96 text-base outline-none text-gray-700 py-2 px-3 resize-none  overflow-y-auto leading-6 transition-colors duration-200 ease-in-out">{{ $post->content }}</textarea>
+                <div id="preview" class="preview md:w-1/2 h-96 rounded border border-gray-300 py-2 px-3 resize-none overflow-y-auto"></div>
             </div>
             <div class="flex gap-2 mt-6">
                 <button type="button" onclick="location.href='{{ route('post.index') }}'" class="flex text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>

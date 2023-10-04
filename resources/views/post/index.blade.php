@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">投稿一覧</h2>
-    </x-slot>
 
     <section class="text-gray-600 body-font overflow-hidden">
         <div class="container px-5 py-12 mx-auto">
