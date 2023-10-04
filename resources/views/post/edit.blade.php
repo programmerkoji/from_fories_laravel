@@ -41,4 +41,5 @@
             </div>
         </form>
     </div>
+    @vite(['resources/js/marked.js'])
 </x-app-layout>
