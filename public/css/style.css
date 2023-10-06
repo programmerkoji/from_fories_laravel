@@ -1,0 +1,148 @@
+@charset "utf-8";
+/* main */
+.bl_post {
+  background: #fff;
+  padding: 32px 24px;
+}
+.bl_post_head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.bl_post_time {
+  font-size: 14px;
+  letter-spacing: 0;
+  padding-left: 24px;
+  position: relative;
+}
+.bl_post_time::before {
+  content: "";
+  background: url(../images/common/clock-regular.svg) top center/cover no-repeat;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.bl_post_ttl {
+  font-size: 30px;
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+/* 記事コンテンツ */
+.bl_post_conts h2 {
+  font-size: 20px;
+  color: #fcfcfc;
+  background: #4B7A95;
+  display: flex;
+  align-items: center;
+  padding: 8px 24px;
+  margin: 1.5em 0 1em;
+}
+.bl_post_conts h3 {
+  font-size: 20px;
+  padding-left: 16px;
+  position: relative;
+  margin: 1.5em 0 1em;
+}
+.bl_post_conts h3::before {
+  content: "";
+  background: #F0E586;
+  width: 4px;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.bl_post_conts p + p {
+  margin-top: 8px;
+}
+.bl_post_conts p > img {
+  max-width: 100%;
+  width: auto;
+}
+.bl_post_conts a {
+  color: #782BDD;
+  text-decoration: underline;
+}
+.bl_post_conts ol {
+  counter-reset: num;
+}
+.bl_post_conts ol li {
+  padding-left: 1.2em;
+  position: relative;
+}
+.bl_post_conts ol li::before {
+  counter-increment: num;
+	content: counter(num) ".";
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.bl_post_conts ul li {
+  padding-left: 1em;
+  position: relative;
+}
+.bl_post_conts ul li::before {
+	content: "・";
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.text_bold {
+  font-weight: bold;
+}
+.bl_post_conts pre {
+    background: #f2f2f2;
+    padding: 1rem;
+    margin-top: 1em;
+}
+/* pager */
+.bl_pager {
+  margin-top: 40px;
+}
+.bl_pager_inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bl_pager_link > a {
+  font-size: 14px;
+  display: block;
+}
+@media screen and (max-width : 767px){
+  .bl_post {
+    padding: 32px 16px;
+  }
+  .bl_post_head {
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .bl_post_time {
+    font-size: 12px;
+    padding-left: 16px;
+  }
+  .bl_post_time::before {
+    width: 12px;
+    height: 12px;
+  }
+  .bl_post_ttl {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+
+  /* 記事コンテンツ */
+  .bl_post_conts > h2 {
+    font-size: 18px;
+    padding: 8px 24px;
+  }
+  .bl_post_conts > h3 {
+    font-size: 18px;
+    padding-left: 12px;
+  }
+}
