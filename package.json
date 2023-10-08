@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "highlight.js": "^11.8.0",
         "marked": "^9.0.3"
     }
 }
