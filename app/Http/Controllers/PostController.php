@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post/create');
+        $categories = Category::select('id', 'name')->get();
+        return view('post/create', compact('categories'));
     }
 
     /**
@@ -49,7 +51,8 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->all();
-            Post::create($data);
+            $post = Post::create($data);
+            $post->categories()->sync($request->input('categories', []));
             DB::commit();
         } catch (\Throwable $th) {
             Log::error($th);
@@ -58,17 +61,6 @@ class PostController extends Controller
         return redirect()
         ->route('post.index')
         ->with('message', '記事を投稿しました');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
