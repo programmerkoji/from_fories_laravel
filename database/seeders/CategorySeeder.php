@@ -17,19 +17,24 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => 'Laravel'
+                'name' => 'Laravel',
+                'bg_color_code' => '#93c088'
             ],
             [
-                'name' => 'HTML,CSS'
+                'name' => 'HTML,CSS',
+                'bg_color_code' => '#f7b23c'
             ],
             [
-                'name' => 'Javascript'
+                'name' => 'Javascript',
+                'bg_color_code' => '#f4b205'
             ],
             [
-                'name' => 'React'
+                'name' => 'React',
+                'bg_color_code' => '#968473'
             ],
             [
-                'name' => 'その他'
+                'name' => 'その他',
+                'bg_color_code' => '#999999'
             ],
         ]);
     }

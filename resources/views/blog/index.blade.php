@@ -15,7 +15,10 @@
                                     <div class="bl_archive_head">
                                         <time class="bl_archive_time" datetime="{{ $post->updated_at->format('Y-m-d') }}">{{ $post->updated_at->format('Y.m.d') }}</time>
                                         <ul class="bl_labelWrapper">
-                                            <li class="el_catLabel"></li>
+                                            @foreach ($post->categories as $category)
+                                                <li class="el_catLabel" style="background: {{ $category->bg_color_code }}">{{ $category->name }}</li>
+                                                @break
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <!-- /.bl_archive_head -->

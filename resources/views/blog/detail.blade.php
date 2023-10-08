@@ -19,7 +19,9 @@
                                     {{ $post->updated_at->format('Y.m.d') }}
                                 </time>
                                 <ul class="bl_post_catLabel">
-                                    <li class="el_catLabel"></li>
+                                    @foreach ($post->categories as $category)
+                                    <li class="el_catLabel" style="background: {{ $category->bg_color_code }}">{{ $category->name }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <!-- /.bl_post_head -->
