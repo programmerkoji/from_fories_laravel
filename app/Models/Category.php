@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Post extends Model
+class Category extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'is_publish',
-        'content',
+        'name',
     ];
 
-    public function categories(): BelongsToMany
+    public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class, 'post_categories');
+        return $this->belongsToMany(Post::class, 'post_categories');
     }
 }
