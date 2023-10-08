@@ -72,7 +72,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('post.edit', compact('post'));
+        $categories = Category::select('id', 'name')->get();
+        $categoryIds = $post->categories->pluck('id')->toArray();
+        return view('post.edit', compact('post', 'categories','categoryIds'));
     }
 
     /**
@@ -87,9 +89,9 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->all();
-            Post::findOrFail($id)
-                ->fill($data)
-                ->save();
+            $post = Post::findOrFail($id);
+            $post->fill($data)->save();
+            $post->categories()->sync($request->input('categories', []));
             DB::commit();
         } catch (\Throwable $th) {
             Log::error($th);

@@ -1,0 +1,70 @@
+/* 記事コンテンツ */
+.bl_post_conts h2 {
+    font-size: 20px;
+    color: #fcfcfc;
+    background: #4b7a95;
+    display: flex;
+    align-items: center;
+    padding: 8px 24px;
+    margin: 1.5em 0 1em;
+}
+.bl_post_conts h3 {
+    font-size: 20px;
+    padding-left: 16px;
+    position: relative;
+    margin: 1.5em 0 1em;
+}
+.bl_post_conts h3::before {
+    content: "";
+    background: #f0e586;
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+.bl_post_conts p + p {
+    margin-top: 8px;
+}
+.bl_post_conts p > img {
+    max-width: 100%;
+    width: auto;
+}
+.bl_post_conts a {
+    color: #782bdd;
+    text-decoration: underline;
+}
+.bl_post_conts ol {
+    counter-reset: num;
+}
+.bl_post_conts ol li {
+    padding-left: 1.2em;
+    position: relative;
+}
+.bl_post_conts ol li::before {
+    counter-increment: num;
+    content: counter(num) ".";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.bl_post_conts ul li {
+    padding-left: 1em;
+    position: relative;
+}
+.bl_post_conts ul li::before {
+    content: "・";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.text_bold {
+    font-weight: bold;
+}
+.bl_post_conts pre {
+    background: #f2f2f2;
+    padding: 1rem;
+    margin-top: 1em;
+    overflow-x: scroll;
+}
