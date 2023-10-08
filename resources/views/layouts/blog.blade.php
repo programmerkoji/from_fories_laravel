@@ -13,7 +13,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/highlight.js'])
 </head>
 <body>
     @include('components.blog.header')

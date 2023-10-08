@@ -58,4 +58,5 @@
         <!-- ly_cont_inner -->
     </div>
     <!-- /.ly_cont -->
+    {{-- @vite(['resources/js/highlight.js']) --}}
 </x-blog-layout>
