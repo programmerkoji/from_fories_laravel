@@ -215,6 +215,9 @@ common
     .ly_aside {
         width: 100%;
     }
+    .el_catLabel {
+        font-size: 12px;
+    }
 }
 /************************
 header
@@ -517,6 +520,7 @@ aside
     font-size: 14px;
     letter-spacing: 0;
     padding-left: 24px;
+    flex: 0 1 120px;
     position: relative;
 }
 .bl_post_time::before {
@@ -535,7 +539,12 @@ aside
     line-height: 1.4;
     margin-bottom: 24px;
 }
-
+.bl_post_catLabel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+}
 /* 記事コンテンツ */
 .bl_post_conts h2 {
     font-size: 20px;
@@ -625,11 +634,14 @@ aside
     }
     .bl_post_head {
         gap: 16px;
+        flex-direction: column;
+        align-items: start;
         margin-bottom: 16px;
     }
     .bl_post_time {
         font-size: 12px;
         padding-left: 16px;
+        flex: 1;
     }
     .bl_post_time::before {
         width: 12px;

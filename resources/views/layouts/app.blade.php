@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/post.css') }}" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

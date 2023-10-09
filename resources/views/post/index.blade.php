@@ -7,9 +7,8 @@
             </div>
             <div class="-my-8 divide-y-2 divide-gray-100">
                 @foreach ($posts as $key => $post)
-                <div class="py-8 flex flex-wrap">
-                    <div class="w-full md:w-64 md:mb-0 mb-3 flex-shrink-0 flex flex-col">
-                        <span class="font-semibold title-font text-gray-700">CATEGORY</span>
+                <div class="py-8 flex flex-wrap gap-2">
+                    <div class="w-full md:w-64 md:mb-0 mb-3 flex-shrink-0 flex flex-col gap-1">
                         <span class="mt-1 text-gray-500 text-sm">
                             @if ($post->updated_at > $post->created_at)
                             {{ $post->updated_at->format('Y-m-d') }}
@@ -17,17 +16,18 @@
                             {{ $post->created_at->format('Y-m-d') }}
                             @endif
                         </span>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach ($post->categories as $category)
+                                <span class="el_catLabel title-font text-white" style="background: {{ $category->bg_color_code }}">{{ $category->name }}</span>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="w-full md:flex-1">
-                        <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $post->title }}</h2>
-                        <p class="leading-relaxed">{{ $post->content }}</p>
-                        <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="text-indigo-500 inline-flex items-center mt-4">Learn More
-                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
+                    <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="w-full md:flex-1 block">
+                        <div class="w-full md:flex-1">
+                            <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $post->title }}</h2>
+                            <p class="leading-relaxed">{{ $post->content }}</p>
+                        </div>
+                    </a>
                     <div class="w-full md:flex-1 md:mb-0 flex items-center gap-4 justify-end">
                         <form id="update_is_publish_{{ $post->id }}" action="{{ route('post.update', ['post' => $post->id]) }}" method="post">
                             @csrf
@@ -40,7 +40,7 @@
                         <form id="delete_{{ $post->id }}" action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post" class="">
                             @csrf
                             @method('delete')
-                            <button class="px-4 py-1 bg-red-600 text-white rounded-md text-sm whitespace-nowrap" data-id="{{ $post->id }}" onclick="deletePost(this)">削除</button>
+                            <button type="button" class="px-4 py-1 bg-red-600 text-white rounded-md text-sm whitespace-nowrap" data-id="{{ $post->id }}" onclick="deletePost(this)">削除</button>
                         </form>
                     </div>
                 </div>
@@ -62,8 +62,11 @@
             'use strict';
             let selectedOption = selectElement.options[selectElement.selectedIndex].text;
             let confirmationMessage = `この投稿を${selectedOption}に変更してもよいですか？`;
+            let isPublishElement = document.getElementById('update_is_publish_' + selectElement.dataset.id);
             if (confirm(confirmationMessage)) {
-                document.getElementById('update_is_publish_' + selectElement.dataset.id).submit();
+                isPublishElement.submit();
+            } else {
+                selectElement.selectedIndex = (selectElement.value === '1') ? 0 : 1;
             }
         }
     </script>

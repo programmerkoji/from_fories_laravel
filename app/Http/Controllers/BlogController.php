@@ -13,8 +13,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('is_publish', '=', 1)
-            ->orderBy('updated_at', 'desc')
+        $posts = Post::with('categories')->where('is_publish', '=', 1)
+            ->orderBy('created_at', 'desc')
             ->paginate(config('const.paginate'));
 
         foreach ($posts as $post) {
@@ -29,7 +29,7 @@ class BlogController extends Controller
      */
     public function detail(int $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with('categories')->findOrFail($id);
         return view('blog.detail', compact('post'));
     }
 }

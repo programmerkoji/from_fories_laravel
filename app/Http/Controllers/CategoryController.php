@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -19,14 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('categories')->orderBy('updated_at', 'desc')
-            ->paginate(config('const.paginate'));
-
-        foreach ($posts as $post) {
-            $post->title = Str::limit($post->title, 40, '...');
-            $post->content = Str::limit($post->content, 80, '...');
-        }
-        return view('post/index', compact('posts'));
+        $categories = Category::orderBy('created_at', 'desc')
+            ->get();
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -36,8 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id', 'name')->get();
-        return view('post/create', compact('categories'));
+        return view('category.create');
     }
 
     /**
@@ -51,16 +42,15 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->all();
-            $post = Post::create($data);
-            $post->categories()->sync($request->input('categories', []));
+            Category::create($data);
             DB::commit();
         } catch (\Throwable $th) {
             Log::error($th);
             DB::rollBack();
         }
         return redirect()
-        ->route('post.index')
-        ->with('message', '記事を投稿しました');
+        ->route('category.index')
+        ->with('message', 'カテゴリを追加しました');
     }
 
     /**
@@ -71,10 +61,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
-        $categories = Category::select('id', 'name')->get();
-        $categoryIds = $post->categories->pluck('id')->toArray();
-        return view('post.edit', compact('post', 'categories','categoryIds'));
+        $category = Category::findOrFail($id);
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -89,22 +77,16 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->all();
-            $post = Post::findOrFail($id);
-            if (array_key_exists('is_publish', $data) && count($data) === 3) {
-                $post->is_publish = $request->is_publish;
-                $post->save();
-            } else {
-                $post->fill($data)->save();
-                $post->categories()->sync($request->input('categories', []));
-            }
+            $category = Category::findOrFail($id);
+            $category->fill($data)->save();
             DB::commit();
         } catch (\Throwable $th) {
             Log::error($th);
             DB::rollBack();
         }
         return redirect()
-        ->route('post.index')
-        ->with('message', '記事を編集しました');
+        ->route('category.index')
+        ->with('message', 'カテゴリを編集しました');
     }
 
     /**
@@ -115,9 +97,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::findOrFail($id)->delete();
+        Category::findOrFail($id)->delete();
         return redirect()
-        ->route('post.index')
-        ->with('message', '記事を削除しました');
+        ->route('category.index')
+        ->with('message', 'カテゴリを削除しました');
     }
 }
