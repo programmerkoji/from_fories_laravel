@@ -68,3 +68,21 @@
     margin-top: 1em;
     overflow-x: scroll;
 }
+
+/* カテゴリ部分 */
+.el_catLabel {
+    font-size: 14px;
+    color: var(--white);
+    min-width: 72px;
+    height: 24px;
+    padding: 0 8px;
+    background: #999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (max-width: 1023px) {
+    .el_catLabel {
+        font-size: 12px;
+    }
+}

@@ -14,7 +14,7 @@ class BlogController extends Controller
     public function index()
     {
         $posts = Post::with('categories')->where('is_publish', '=', 1)
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(config('const.paginate'));
 
         foreach ($posts as $post) {

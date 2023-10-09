@@ -17,11 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('post_id')
                 ->constrained()
-                ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId('category_id')
                 ->constrained()
-                ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();
         });

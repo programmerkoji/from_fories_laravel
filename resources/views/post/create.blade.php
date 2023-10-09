@@ -33,7 +33,7 @@
                 <div id="preview" class="preview md:w-1/2 h-96 rounded border border-gray-300 py-2 px-3 resize-none overflow-y-auto"></div>
             </div>
             <div class="flex gap-2 mt-6">
-                <button onclick="location.href='{{ route('post.index') }}'" class="flex text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
+                <button type="button" onclick="location.href='{{ route('post.index') }}'" class="flex text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
                 <button type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">投稿する</button>
             </div>
         </form>
